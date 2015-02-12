@@ -260,8 +260,9 @@ public class javaDoctor extends javax.swing.JFrame {
                         .addGap(168, 168, 168))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(deleteFile)
-                        .addGap(85, 85, 85)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton3)
@@ -376,52 +377,7 @@ public class javaDoctor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void walk( String path, String target ) {
- 
-            File root = new File( path );
-            File[] list = root.listFiles();
- 
-            if (list == null) return;
- 
-            for ( File f : list ) {
-                String ext = f.getName();
-                System.out.println(ext);
-                if ( f.isDirectory() ) {
-                    walk( f.getAbsolutePath(),target);
-                    System.out.println( "Dir:" + f.getAbsoluteFile() );
-                }
-                else {
-                    if(ext.equals(target)){
-                     Result5.setText("file deleted!");
-                     f.delete();
-                    }
-                    System.out.println( "File:" + f.getAbsoluteFile() );
-                }
-            }
-        }
-public void find ( String path, String target ) {
- 
-            File root = new File( path );
-            File[] list = root.listFiles();
- 
-            if (list == null) return;
- 
-            for ( File f : list ) {
-                String ext = f.getName();
-                System.out.println(ext);
-                if ( f.isDirectory() ) {
-                    find( f.getAbsolutePath(),target);
-                    System.out.println( "Dir:" + f.getAbsoluteFile() );
-                }
-                else {
-                    if(ext.equals(target)){
-                     Result5.setText("file deleted!");
-                     f.delete();
-                    }
-                    System.out.println( "File:" + f.getAbsoluteFile() );
-                }
-            }
-        }
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // set varable would be 1 2 or 3
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -469,8 +425,8 @@ public void find ( String path, String target ) {
     }
     }
     private void deleteFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFileActionPerformed
-        Result5.setText("running");
-        javaDoctor fw = new javaDoctor();
+       Result5.setText("running");
+        
         File[] roots = File.listRoots();
        
     
@@ -479,7 +435,7 @@ public void find ( String path, String target ) {
             
         System.out.println("Root["+i+"]:" + roots[i]);
            // fw.walk(roots[i].getAbsolutePath(),"1193.idrc");
-        fw.find("C:\\","1193.idrc");
+        walk(roots[i].getAbsolutePath(),jTextField4.getText());
         }
              
        /* try{
@@ -506,8 +462,8 @@ public void find ( String path, String target ) {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void fileCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileCheckActionPerformed
-        this.Result2.setText("Running...");
-  javaDoctor fw = new javaDoctor();
+      this.Result2.setText("Running...");
+ 
         File[] roots = File.listRoots();
        
     
@@ -516,9 +472,9 @@ public void find ( String path, String target ) {
             
         System.out.println("Root["+i+"]:" + roots[i]);
            // fw.walk(roots[i].getAbsolutePath(),"1193.idrc");
-        fw.walk("C:\\","1193.idrc");
+      find(roots[i].getAbsolutePath(),jTextField4.getText());
         }
-                   
+               
 //  File f = null;
     //  f = new File(  "c:\\" + this.jTextField3.getText());
             /*    if(f.exists() && !f.isDirectory()){
@@ -678,6 +634,55 @@ this.Result8.setText("finshed proccess");
     /**
      * @param args the command line arguments
      */
+   public void walk( String path, String target ) {
+  System.out.println( "check");
+            File root = new File( path );
+            File[] list = root.listFiles();
+ 
+            if (list == null) return;
+ 
+            for ( File f : list ) {
+                String ext = f.getName();
+                System.out.println(ext);
+                if ( f.isDirectory() ) {
+                    walk( f.getAbsolutePath(),target);
+                    System.out.println( "Dir:" + f.getAbsoluteFile() );
+                }
+                else {
+                    if(ext.equals(target)){
+                     Result5.setText("file deleted!");
+                   //  f.delete();
+                    }
+                    System.out.println( "File:" + f.getAbsoluteFile() );
+                }
+            }
+        }
+public void find ( String path, String target ) {
+  System.out.println( "check");
+            File root = new File( path );
+            File[] list = root.listFiles();
+ 
+            if (list == null) return;
+ 
+            for ( File f : list ) {
+                String ext = f.getName();
+                System.out.println(ext);
+                if ( f.isDirectory() ) {
+                    find( f.getAbsolutePath(),target);
+                    System.out.println( "Dir:" + f.getAbsoluteFile() );
+                }
+                else {
+                    if(ext.equals(target)){
+                    System.out.println("found it");
+                    Result2.setText("file deleted!");
+                   //  f.delete();
+                    }
+                    System.out.println( "File:" + f.getAbsoluteFile() );
+                }
+            }
+        
+        }
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -701,12 +706,13 @@ this.Result8.setText("finshed proccess");
             java.util.logging.Logger.getLogger(javaDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-          
-        java.awt.EventQueue.invokeLater(new Runnable() {
+          System.out.println("check1");
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new javaDoctor().setVisible(true);
             }
         });
+                
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
