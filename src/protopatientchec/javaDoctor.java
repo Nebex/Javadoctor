@@ -6,7 +6,7 @@
 
 package protopatientchec;
 import java.io.File;
- 
+ //Liquify.aex
   import java.security.MessageDigest;
 import java.io.*; 
 import java.io.FileOutputStream;
@@ -25,7 +25,7 @@ import java.util.Collection;
 
 import java.util.Scanner;
 import java.util.zip.CRC32;
-import org.apache.commons.codec.digest.DigestUtils;
+
 /*
 *
  *
@@ -233,20 +233,19 @@ public class javaDoctor extends javax.swing.JFrame {
                         .addComponent(Result5, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(146, 146, 146)
-                                .addComponent(jLabel3))
-                            .addComponent(Result1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(84, 84, 84))))
+                        .addComponent(Result1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(43, 43, 43))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1)
-                        .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(198, 198, 198))
@@ -291,13 +290,16 @@ public class javaDoctor extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(12, 12, 12)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Result1)
@@ -353,7 +355,7 @@ public class javaDoctor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(10, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,6 +383,46 @@ public class javaDoctor extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // set varable would be 1 2 or 3
     }//GEN-LAST:event_jComboBox1ActionPerformed
+    public static void benchmark(){
+        
+        long startTime = System.currentTimeMillis();
+        long endtime = startTime + 600;
+        int index = 0;
+        while (true) {
+            double x = Math.sqrt(index);
+            long now = System.currentTimeMillis();
+            if (now > endtime){
+                break;
+            }
+            index++;
+        }
+       
+        Properties prop = new Properties();
+	OutputStream output = null;
+        String indexString = "" + index;
+	try {
+ 
+		output = new FileOutputStream("config.properties");
+ 
+		
+		prop.setProperty("benchmark",indexString );
+		prop.store(output, null);
+                     
+	} catch (IOException io) {
+		io.printStackTrace();
+	} finally {
+		if (output != null) {
+			try {
+				output.close();
+                                
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+ 
+	}
+        
+    }
     public void process(){
      String testBench = "" ;
 	Properties prop = new Properties();
@@ -540,14 +582,14 @@ public class javaDoctor extends javax.swing.JFrame {
 		
 		prop.setProperty("benchmark",indexString );
 		prop.store(output, null);
-                     this.Result1.setText("done"); 
+                     this.Result1.setText("benchmark set"); 
 	} catch (IOException io) {
 		io.printStackTrace();
 	} finally {
 		if (output != null) {
 			try {
 				output.close();
-                                 this.Result1.setText("done"); 
+                                 this.Result1.setText("benchmark set"); 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -600,7 +642,7 @@ String orgianl = org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
        String password = String.valueOf(x);
        int rando = (int) Math.floor((Math.random() * 26));
        int randoTwo = (int) Math.floor((Math.random() * 26));
-     this.Result10.setText("remmove the . " + password + letterZ[rando].toUpperCase() + letterZ[randoTwo]);
+     this.Result10.setText( password.substring(2) + letterZ[rando].toUpperCase() + letterZ[randoTwo]);
 
 
           
@@ -636,6 +678,7 @@ this.Result8.setText("finshed proccess");
      */
    public void walk( String path, String target ) {
   System.out.println( "check");
+           int i = 0;
             File root = new File( path );
             File[] list = root.listFiles();
  
@@ -647,18 +690,23 @@ this.Result8.setText("finshed proccess");
                 if ( f.isDirectory() ) {
                     walk( f.getAbsolutePath(),target);
                     System.out.println( "Dir:" + f.getAbsoluteFile() );
+                    i = 1;
                 }
                 else {
                     if(ext.equals(target)){
-                     Result5.setText("file deleted!");
+                     Result4.setText("file does exist!");
                    //  f.delete();
                     }
                     System.out.println( "File:" + f.getAbsoluteFile() );
                 }
             }
+            if(i == 0){
+            Result4.setText("file cannot be found");
+            }
         }
 public void find ( String path, String target ) {
   System.out.println( "check");
+             int i = 0;
             File root = new File( path );
             File[] list = root.listFiles();
  
@@ -674,16 +722,21 @@ public void find ( String path, String target ) {
                 else {
                     if(ext.equals(target)){
                     System.out.println("found it");
-                    Result2.setText("file deleted!");
-                   //  f.delete();
+                    Result3.setText("file deleted!");
+                     i = 1;
+                    //  f.delete();
                     }
                     System.out.println( "File:" + f.getAbsoluteFile() );
                 }
+            }
+            if(i == 0){
+            Result3.setText("file cannot be found");
             }
         
         }
         
     public static void main(String args[]) {
+      
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -710,6 +763,7 @@ public void find ( String path, String target ) {
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new javaDoctor().setVisible(true);
+                benchmark();
             }
         });
                 
