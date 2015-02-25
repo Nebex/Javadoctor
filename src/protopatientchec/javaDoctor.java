@@ -220,11 +220,6 @@ public class javaDoctor extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(fileCheck)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(103, 103, 103))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -269,11 +264,12 @@ public class javaDoctor extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel3)
-                                        .addGap(147, 147, 147)
-                                        .addComponent(jButton2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1)
+                                        .addGap(47, 47, 47)
+                                        .addComponent(jButton2)
+                                        .addGap(37, 37, 37))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(Result2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Result3, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -281,6 +277,12 @@ public class javaDoctor extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Result10, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(fileCheck)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,8 +299,8 @@ public class javaDoctor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -413,7 +415,7 @@ public class javaDoctor extends javax.swing.JFrame {
 		if (output != null) {
 			try {
 				output.close();
-                                
+                                System.out.println("check2");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -476,7 +478,8 @@ public class javaDoctor extends javax.swing.JFrame {
             
         System.out.println("Root["+i+"]:" + roots[i]);
            // fw.walk(roots[i].getAbsolutePath(),"1193.idrc");
-        walk(roots[i].getAbsolutePath(),jTextField4.getText());
+        //walk(roots[i].getAbsolutePath(),jTextField4.getText());
+             walk("e://",jTextField4.getText());
         }
              
        /* try{
@@ -513,7 +516,8 @@ public class javaDoctor extends javax.swing.JFrame {
             
         System.out.println("Root["+i+"]:" + roots[i]);
            // fw.walk(roots[i].getAbsolutePath(),"1193.idrc");
-      find(roots[i].getAbsolutePath(),jTextField4.getText());
+     // find(roots[i].getAbsolutePath(),jTextField4.getText());
+       find("c://",jTextField3.getText());
         }
                
 //  File f = null;
@@ -658,7 +662,7 @@ String orgianl = org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
       C:\Apps\protopatientchec\src\hunterKillerDrone.bat
       */
           try {
-Process p = Runtime.getRuntime().exec("cmd /c start  C:\\Apps\\protopatientchec\\src\\hunterKillerDrone.bat");
+Process p = Runtime.getRuntime().exec("cmd /c start C:\\Users\\MorrisV\\Desktop\\tester.bat");
 this.Result8.setText("running......");  
 p.waitFor();      
 this.Result8.setText("finshed proccess");
@@ -693,14 +697,14 @@ this.Result8.setText("finshed proccess");
                 }
                 else {
                     if(ext.equals(target)){
-                     Result4.setText("file does exist!");
+                     Result5.setText("file does exist!");
                    //  f.delete();
                     }
                     System.out.println( "File:" + f.getAbsoluteFile() );
                 }
             }
             if(i == 0){
-            Result4.setText("file cannot be found");
+            Result5.setText("file cannot be found");
             }
         }
 public void find ( String path, String target ) {
@@ -716,20 +720,20 @@ public void find ( String path, String target ) {
                 System.out.println(ext);
                 if ( f.isDirectory() ) {
                     find( f.getAbsolutePath(),target);
-                    System.out.println( "Dir:" + f.getAbsoluteFile() );
+                    System.out.println( "Dir: " + f.getAbsoluteFile() );
                 }
                 else {
                     if(ext.equals(target)){
                     System.out.println("found it");
-                    Result3.setText("file deleted!");
+                    Result2.setText("file deleted!");
                      i = 1;
                     //  f.delete();
                     }
-                    System.out.println( "File:" + f.getAbsoluteFile() );
+                    System.out.println( "File: " + f.getAbsoluteFile() );
                 }
             }
             if(i == 0){
-            Result3.setText("file cannot be found");
+            Result2.setText("file cannot be found");
             }
         
         }
